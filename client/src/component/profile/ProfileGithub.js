@@ -17,13 +17,13 @@ class ProfileGithub extends Component {
       .then(data => {
         this.setState({ repos: data })
       })
-      .catch(err => console.log(err))
+      .catch(err => (err.response.data))
   }
 
   render() {
     const { repos } = this.state
 
-    const repoItems = repos.map((repo, index) => (
+    const repoItems = Array.isArray(repos) ? repos.map((repo, index) => (
       <div className="card card-body mb-2" key={index}>
         <div className="row">
           <div className="col-md-6">
@@ -47,7 +47,7 @@ class ProfileGithub extends Component {
           </div>
         </div>
       </div>
-    ))
+    )) : 'Not Found Github Username'
 
     return (
       <div>
